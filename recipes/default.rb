@@ -7,7 +7,7 @@ chef_gem "ruby-shadow"
 
 group "sftp"
 
-ssh_config nil do
+ssh_config "*" do
 	options ({
 		:Subsystem => "sftp internal-sftp",
 		:Match => "group sftp",
