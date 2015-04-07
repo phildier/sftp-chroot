@@ -7,18 +7,16 @@ chef_gem "ruby-shadow"
 
 group "sftp"
 
-ssh_config "Subsystem sftp" do
-	string "Subsystem sftp internal-sftp"
-end
-
-ssh_config "Match group sftp" do
-	string "Match group sftp\\n X11Forwarding no\\n ChrootDirectory %h\\n AllowTcpForwarding no\\n ForceCommand internal-sftp\\n"
-	action :add_multiline
-end
-
-ssh_config "enable PasswordAuthentication" do
-	string "PasswordAuthentication yes"
-	action :add
+ssh_config nil do
+	options ({
+		:Subsystem => "sftp internal-sftp",
+		:Match => "group sftp",
+		:X11Forwarding => "no",	
+		:ChrootDirectory => "no",	
+		:AllowTcpForwarding => "no",	
+		:ForceCommand => "internal-sftp",	
+		:PasswordAuthentication => "yes"
+		})
 end
 
 case node['platform']
