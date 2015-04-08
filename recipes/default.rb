@@ -1,5 +1,7 @@
 # echo "mypassword" | makepasswd --clearfrom=- --crypt-md5 |awk '{ print $2 }'
 
+package "makepasswd"
+
 node.override['build-essential'][:compile_time] = true
 include_recipe "build-essential"
 chef_gem "ruby-shadow"

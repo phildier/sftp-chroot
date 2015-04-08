@@ -61,5 +61,5 @@ private
 
 # TODO ruby way of doing this
 def hash_password(pw)
-	system "echo '#{pw}' | makepasswd --clearfrom=- --crypt-md5 |awk '{ print $2 }'"
+	`echo '#{pw}' | makepasswd --clearfrom=- --crypt-md5 |awk '{ print $2 }'`.strip
 end
