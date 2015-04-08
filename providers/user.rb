@@ -4,7 +4,7 @@ action :create do
 	username = new_resource.username
 	password = new_resource.password
 	groups = new_resource.groups
-	directories = new_resource.directories
+	mounts = new_resource.mounts
 
 	hashed_password = hash_password(password)
 
@@ -35,7 +35,7 @@ action :create do
 		end
 	end
 
-	directories.each do |source, destination|
+	mounts.each do |source, destination|
 		if File.exists?("#{source}")
 			directory "/home/#{username}/#{destination}" do
 				owner "root"
