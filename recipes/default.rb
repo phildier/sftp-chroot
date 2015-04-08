@@ -2,22 +2,26 @@
 
 node.override['build-essential'][:compile_time] = true
 include_recipe "build-essential"
-
 chef_gem "ruby-shadow"
 
 group "sftp"
 
-ssh_config "*" do
-	options ({
-		:Subsystem => "sftp internal-sftp",
-		:Match => "group sftp",
-		:X11Forwarding => "no",	
-		:ChrootDirectory => "no",	
-		:AllowTcpForwarding => "no",	
-		:ForceCommand => "internal-sftp",	
-		:PasswordAuthentication => "yes"
-		})
-end
+node.override[:openssh] = {
+	:server => {
+		"Subsystem" => "sftp internal-sftp",
+		"match" => {
+			"group sftp" => {
+				:X11Forwarding => "no",	
+				:ChrootDirectory => "no",	
+				:AllowTcpForwarding => "no",	
+				:ForceCommand => "internal-sftp",	
+				:PasswordAuthentication => "yes"
+			}
+		}
+	}
+}
+include_recipe "openssh"
+
 
 case node['platform']
 when "redhat","centos","scientific","fedora","suse","amazon"
