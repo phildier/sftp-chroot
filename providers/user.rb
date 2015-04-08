@@ -36,7 +36,7 @@ action :create do
 	end
 
 	mounts.each do |source, destination|
-		if File.exists?("#{source}")
+		if ::File.exists?("#{source}")
 			directory "/home/#{username}/#{destination}" do
 				owner "root"
 				group "root"
