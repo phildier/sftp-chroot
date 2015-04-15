@@ -50,7 +50,7 @@ action :create do
 				options "rw,bind"
 			end
 		else
-			abort("Folder #{source} does not exist - can not mount it to chrooted home of user #{userName}")
+			abort("Folder #{source} does not exist - can not mount it to chrooted home of user #{username}")
 		end
 	end
 

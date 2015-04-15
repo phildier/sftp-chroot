@@ -11,6 +11,7 @@ group "sftp"
 node.override[:openssh] = {
 	:server => {
 		"Subsystem" => "sftp internal-sftp",
+		"UseDNS" => "no",
 		"match" => {
 			"group sftp" => {
 				:X11Forwarding => "no",	
